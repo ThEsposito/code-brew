@@ -3,20 +3,29 @@ package academy.devdojo.maratonajava.javacore.F_modificadorestatico.domain;
 public class Carro {
     private String nome;
     private double velocidadeMaxima;
-    public static double velocidadeLimite = 250;
+    private static double velocidadeLimite = 250;
+
+    public Carro(String nome, double velocidadeMaxima) {
+        this.nome = nome;
+        this.velocidadeMaxima = velocidadeMaxima;
+    }
 
     public void imprime(){
         System.out.println("--------------");
         System.out.println("Nome: " + this.nome);
         System.out.println("Velocidade Maxima: " + this.velocidadeMaxima);
-        System.out.println("Velocidade Limite: " + this.velocidadeLimite);
+        System.out.println("Velocidade Limite: " + Carro.velocidadeLimite);
+        // Não é adequado usar o this em statics, porque o this referencia ao atributo DO OBJETO
+        // O static indica que é um atributo que referencia à classe como um todo.
         }
 
-    public Carro(String nome, double velocidadeMaxima) {
-        this.nome = nome;
-        this.velocidadeMaxima = velocidadeMaxima;
-        this.velocidadeLimite = velocidadeLimite;
-    }
+        public static void setVelocidadeLimite(double velocidadeLimite){
+            Carro.velocidadeLimite = velocidadeLimite;
+        }
+
+        public static double getVelocidadeLimite(){
+            return velocidadeLimite; // Não precisa de "Carro." pq n tem variável local (parâmetro)
+        }
 
     public String getNome() {
         return nome;
@@ -32,13 +41,5 @@ public class Carro {
 
     public void setVelocidadeMaxima(double velocidadeMaxima) {
         this.velocidadeMaxima = velocidadeMaxima;
-    }
-
-    public double getVelocidadeLimite() {
-        return velocidadeLimite;
-    }
-
-    public void setVelocidadeLimite(double velocidadeLimite) {
-        this.velocidadeLimite = velocidadeLimite;
     }
 }

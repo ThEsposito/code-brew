@@ -40,8 +40,7 @@ public class Funcionario {
     public void imprimeDados() {
         System.out.println(this.nome);
         System.out.println(this.idade);
-        if (this.salarios == null)
-            return;
+        if (this.salarios == null) return;
         for (double sal_atual : salarios) {
             System.out.print(sal_atual + " ");
         }

@@ -5,12 +5,24 @@ public class Aluno {
     private double nota1;
     private double nota2;
     private double nota3;
+    private double[] notas;
 
     public Aluno(String nome, double nota1, double nota2, double nota3){
         this.nome = nome;
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
+    }
+    public Aluno(String nome, double nota1, double nota2, double nota3, double... notas){
+        this(nome,nota1,nota2,nota3);
+        this.notas = new double[notas.length];
+        this.notas = notas.clone();
+
+    }
+
+    public void setNotas(double... notas){
+        this.notas = new double[notas.length];
+        this.notas = notas;
     }
 
     public double calcularMedia(){
@@ -57,4 +69,7 @@ public class Aluno {
     public void setNota3(double nota3) {
         this.nota3 = nota3;
     }
+
+
+
 }
