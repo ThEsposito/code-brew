@@ -22,7 +22,7 @@ public class Seminario {
     public void gerarRelatorio() {
         System.out.println("Título: " + titulo);
         System.out.println(local.info());
-        if (alunos != null) {
+        if (alunos != null && alunos.length != 0) {
             System.out.println("Alunos inscritos:");
             for (Aluno aluno : alunos) {
                 System.out.print(" - ");

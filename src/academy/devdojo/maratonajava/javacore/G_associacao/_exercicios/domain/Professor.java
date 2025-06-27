@@ -21,7 +21,7 @@ public class Professor {
         System.out.println("Nome: " + nome);
         System.out.println("Especialidade: " + especialidade);
 
-        if (seminarios != null) {
+        if (seminarios != null && seminarios.length != 0) {
             System.out.println("Seminários que " + nome + " ministra:");
             for (Seminario seminario : seminarios) {
                 System.out.println(" - " + seminario.getTitulo());
