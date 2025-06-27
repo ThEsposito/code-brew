@@ -17,6 +17,7 @@ public class Seminario {
     public Seminario(String titulo, Local local, Aluno[] alunos) {
         this(titulo, local);
         this.alunos = alunos;
+        // Setar seminario pro aluno já aqui dentro??
     }
 
     public void gerarRelatorio() {
