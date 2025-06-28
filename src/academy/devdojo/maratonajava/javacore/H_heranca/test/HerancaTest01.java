@@ -10,17 +10,15 @@ public class HerancaTest01 {
         endereco.setRua("Rua segredo, nro 50135");
         endereco.setCep("012345-209");
 
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Tetequinho");
+        Pessoa pessoa = new Pessoa("Tetequinho");
         pessoa.setEndereco(endereco);
         pessoa.setCpf("123.456.789-11");
 
         pessoa.imprime();
 
-        Funcionario funcionario = new Funcionario();
+        Funcionario funcionario = new Funcionario("Theo CLT");
 
         // Métodos (e atributos) herdados:
-        funcionario.setNome("Theo CLT");
         funcionario.setCpf("16501232545");
         funcionario.setEndereco(endereco);
 
