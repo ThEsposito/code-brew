@@ -1,7 +1,7 @@
 package academy.devdojo.maratonajava.javacore.J_modificadorFinal.test;
 
 import academy.devdojo.maratonajava.javacore.J_modificadorFinal.domain.Carro;
-import academy.devdojo.maratonajava.javacore.J_modificadorFinal.domain.Comprador;
+import academy.devdojo.maratonajava.javacore.J_modificadorFinal.domain.Ferrari;
 
 public class CarroTest01 {
     public static void main(String[] args) {
@@ -20,5 +20,11 @@ public class CarroTest01 {
         carro.COMPRADOR.setNome("Theozão comprador de fusca");
         System.out.println(carro.COMPRADOR);
         // Os atributos de objetos final podem ser reatribuídos livremente
+
+        Ferrari ferrari = new Ferrari();
+        ferrari.setNome("Enzo");
+        ferrari.imprime(); // O mét. imprime() é final. Não pode ser sobrescrito.
+
+        // Classes final's não podem ser extendidas.
     }
 }

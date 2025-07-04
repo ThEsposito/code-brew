@@ -10,6 +10,11 @@ public class Carro {
     static {
         VELOCIDADE_LIMITE = 250;
     }
+
+    public final void imprime(){ // Métodos finais não podem ser sobrescritos
+        System.out.println(this.nome);
+    }
+
     public String getNome() {
         return nome;
     }
