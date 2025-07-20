@@ -13,5 +13,12 @@ public class ClienteTest01 {
         System.out.println(cliente2);
         System.out.println(TipoPagamento.DEBITO.calcularDesconto(100));
         System.out.println(TipoPagamento.CREDITO.calcularDesconto(100));
+        TipoCliente tipoCliente = TipoCliente.valueOf("PESSOA_JURIDICA");
+        // Vira uma enum, a partir do seu nome (o nome da constante) em String;
+        System.out.println(tipoCliente.getNomeRelatorio());
+
+        // Vira uma enum, a partir DO VALOR DE UM DE SEUS ATRIBUTOS. Null, se for entrada inválida.
+        TipoCliente tipoCliente2 = TipoCliente.tipoClientePorNomeRelatorio("Pessoa Física");
+        System.out.println(tipoCliente2);
     }
 }
