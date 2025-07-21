@@ -10,5 +10,6 @@ public class FuncionarioTest01 {
         Desenvolvedor dev = new Desenvolvedor("Zoro", 12000);
         System.out.println(gerente);
         System.out.println(dev);
+        dev.imprime();
     }
 }
