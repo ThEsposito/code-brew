@@ -7,13 +7,11 @@ public abstract class Funcionario {
     public Funcionario(String nome, double salario) {
         this.nome = nome;
         this.salario = salario;
+        calculaBonus();
+        // Obs: apesar de calculaBonus() ter sido chamado dentro da superclasse, ele
+        // ainda assim vai variar conforme a subclasse que foi instanciada, já que
+        // QUEM EXECUTA O MÉTDO É O OBJETO.
     }
 
-    @Override
-    public String toString() {
-        return "Funcionario{" +
-                "nome='" + nome + '\'' +
-                ", salario=" + salario +
-                '}';
-    }
+    public abstract void calculaBonus();
 }
