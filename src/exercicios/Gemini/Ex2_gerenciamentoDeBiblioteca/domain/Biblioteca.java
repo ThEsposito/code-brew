@@ -2,8 +2,7 @@ package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain;
 import java.util.ArrayList;
 
 public class Biblioteca {
-    public ArrayList<ItemBiblioteca> itens;
-
+    private ArrayList<ItemBiblioteca> itens;
     {
         itens = new ArrayList<ItemBiblioteca>();
     }
@@ -38,11 +37,18 @@ public class Biblioteca {
     public void devolverItem(String ID_UNICO_item){
         for(ItemBiblioteca item: itens){
             if(item.getID_UNICO().toString().equals(ID_UNICO_item)){
-                if (item.getStatus() != StatusItem.DISPONIVEL) {
-                    item.setStatus(StatusItem.DISPONIVEL);
-                    System.out.println("Item emprestado com sucesso!");
-                } else {
-                    System.out.println("Este item já estava disponível!");
+                // Não poderíamos emprestar itens em manutenção ou extraviados
+                switch(item.getStatus()){
+                    case StatusItem.EMPRESTADO:
+                        item.setStatus(StatusItem.DISPONIVEL);
+                        System.out.println("Item emprestado com sucesso");
+                        break;
+                    case StatusItem.DISPONIVEL:
+                        System.out.println("Este item já estava disponível!");
+                        break;
+                    default:
+                        // Poderia retornar alguma exceção, talvez.
+                        System.out.println("Este item deveria estar indisponível! Operação Cancelada.");
                 }
                 return;
             }

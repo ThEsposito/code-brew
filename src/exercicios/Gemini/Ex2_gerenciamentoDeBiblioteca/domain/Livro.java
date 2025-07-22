@@ -10,10 +10,10 @@ public class Livro extends ItemBiblioteca{
         this.numeroPaginas = numeroPaginas;
     }
 
-    // todo: Livros terão prazo de entrega maior, a depender do nro de páginas??
     @Override
     public int calcularPrazoEmprestimo(){
-        return 21;
+        // 7 dias para cada 200 páginas
+        return 7*(numeroPaginas/200);
     }
 
     @Override

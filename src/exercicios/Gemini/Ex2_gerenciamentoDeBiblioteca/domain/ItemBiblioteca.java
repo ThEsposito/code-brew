@@ -3,8 +3,8 @@ package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain;
 import java.util.UUID;
 
 public abstract class ItemBiblioteca {
-    private String titulo;
-    private int anoPublicacao;
+    private final String titulo;
+    private final int anoPublicacao;
     private final UUID ID_UNICO;
     private static final int DIAS_PADRAO_EMPRESTIMO = 14; // static????
     private StatusItem status = StatusItem.DISPONIVEL;
@@ -45,12 +45,4 @@ public abstract class ItemBiblioteca {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "ItemBiblioteca{" +
-                "titulo='" + titulo + '\'' +
-                ", anoPublicacao=" + anoPublicacao +
-                ", status=" + status +
-                '}';
-    }
 }

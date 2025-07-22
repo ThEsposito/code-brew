@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class BibliotecaTest01 {
     public static void main(String[] args) {
-        Livro livro1 = new Livro(2020, "Diário de um Banana", "Eu", 150);
-        Livro livro2 = new Livro(2021, "Diário de um Banana2", "Eu", 150);
-
-        Revista rev1 = new Revista(2024, "PlayBoy: sexo intenso", 2, Mes.DEZEMBRO);
+        Livro livro1 = new Livro(2007, "Diário de um Banana", "Jeff Kinney", 221);
+        Livro livro2 = new Livro(1947, "O diário de Anne Frank", "Anne Frank", 445);
+        Livro livro3 = new Livro(1990, "Introduction to Algorithms", "Thomas H. Cormen", 1312);
+        Revista rev1 = new Revista(2024, "Revista Recreio", 2, Mes.DEZEMBRO);
 
         CDAudio cd1 = new CDAudio(2018, "Astroworld", "Travis Scott", 17);
 
@@ -27,5 +27,7 @@ public class BibliotecaTest01 {
         for (ItemBiblioteca item: teste){
             System.out.println(item.getTitulo());
         }
+
+        System.out.println(livro1.calcularPrazoEmprestimo());
     }
 }
