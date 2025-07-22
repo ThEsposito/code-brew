@@ -1,6 +1,6 @@
-package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.service;
-import exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model.ItemBiblioteca;
-import exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model.StatusItem;
+package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.service;
+import exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.model.ItemBiblioteca;
+import exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.model.StatusItem;
 
 import java.util.ArrayList;
 
