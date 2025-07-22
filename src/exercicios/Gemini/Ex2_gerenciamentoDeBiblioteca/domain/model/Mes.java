@@ -1,4 +1,4 @@
-package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain;
+package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model;
 
 public enum Mes {
     JANEIRO(1), FEVEREIRO(2), MARCO(3), ABRIL(4),

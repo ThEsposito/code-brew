@@ -1,10 +1,13 @@
-package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain;
+package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.service;
+import exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model.ItemBiblioteca;
+import exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model.StatusItem;
+
 import java.util.ArrayList;
 
 public class Biblioteca {
     private ArrayList<ItemBiblioteca> itens;
     {
-        itens = new ArrayList<ItemBiblioteca>();
+        itens = new ArrayList<>();
     }
 
     public void adicionarItem(ItemBiblioteca item){
@@ -57,7 +60,7 @@ public class Biblioteca {
     }
 
     public ArrayList<ItemBiblioteca> buscarItemPorTitulo(String titulo){
-        ArrayList<ItemBiblioteca> itensComEsseTitulo = new ArrayList<ItemBiblioteca>();
+        ArrayList<ItemBiblioteca> itensComEsseTitulo = new ArrayList<>();
         for(ItemBiblioteca item: itens){
             if(item.getTitulo().toLowerCase().contains(titulo.toLowerCase())){
                 itensComEsseTitulo.add(item);

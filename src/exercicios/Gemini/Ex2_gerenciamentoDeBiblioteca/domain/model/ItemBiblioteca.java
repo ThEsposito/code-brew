@@ -1,12 +1,11 @@
-package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain;
-
+package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model;
 import java.util.UUID;
 
 public abstract class ItemBiblioteca {
     private final String titulo;
     private final int anoPublicacao;
     private final UUID ID_UNICO;
-    private static final int DIAS_PADRAO_EMPRESTIMO = 14; // static????
+    public static final int DIAS_PADRAO_EMPRESTIMO = 14;
     private StatusItem status = StatusItem.DISPONIVEL;
 
     {

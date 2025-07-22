@@ -1,4 +1,4 @@
-package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain;
+package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model;
 
 public enum StatusItem {
     DISPONIVEL("Item disponível para empréstimo"){

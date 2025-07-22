@@ -1,4 +1,4 @@
-package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain;
+package exercicios.Gemini.Ex2_gerenciamentoDeBiblioteca.domain.model;
 
 public class CDAudio extends ItemBiblioteca{
     private final String artista;
