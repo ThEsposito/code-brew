@@ -13,5 +13,11 @@ public class DataLoaderTest01 {
         // seus métodos de alguma forma
         databaseLoader.load();
         fileLoader.load();
+
+        databaseLoader.remove();
+        fileLoader.remove();
+
+        databaseLoader.checkPermission();
+        fileLoader.checkPermission();
     }
 }
