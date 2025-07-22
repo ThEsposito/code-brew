@@ -1,0 +1,60 @@
+Olá! Que ótimo que você está buscando desafios para aprofundar seus conhecimentos em Java e POO. Preparei alguns exercícios que abordam os conceitos que você mencionou, com um toque a mais para realmente te fazer pensar.
+
+Exercício 1: Sistema de Gerenciamento de Biblioteca
+
+Crie um sistema para gerenciar itens em uma biblioteca.
+
+Conceitos Focados: Herança, final, Classes e Métodos Abstratos, Enums complexos, POO.
+
+Detalhes:
+    Classe Abstrata ItemBiblioteca:
+
+        Deve ter atributos titulo (String), anoPublicacao (int) e um ID_UNICO (String) que deve ser gerado uma única vez ao instanciar o objeto e não pode ser alterado.
+
+        Deve conter um método abstrato calcularPrazoEmprestimo() que retorna um int (número de dias).
+
+        Deve ter um método exibirDetalhes() que imprima as informações básicas do item.
+
+        Defina uma constante DIAS_PADRAO_EMPRESTIMO (int) com um valor inicial (e.g., 14 dias).
+
+    Classes Concretas:
+
+        Livro: Herda de ItemBiblioteca. Adicione atributos como autor (String) e numeroPaginas (int). Implemente calcularPrazoEmprestimo() considerando que livros podem ter um prazo maior ou menor que o padrão, dependendo de alguma regra (e.g., livros com mais de 500 páginas têm 21 dias de prazo).
+
+        Revista: Herda de ItemBiblioteca. Adicione atributos como edicao (int) e mesPublicacao (String). Implemente calcularPrazoEmprestimo() com um prazo fixo menor que o padrão.
+
+        CDAudio: Herda de ItemBiblioteca. Adicione atributos como artista (String) e numeroFaixas (int). Implemente calcularPrazoEmprestimo() com um prazo específico para mídias.
+
+    Enum StatusItem:
+
+        Crie uma enumeração chamada StatusItem com os valores: DISPONIVEL, EMPRESTADO, EM_MANUTENCAO, EXTRAVIADO.
+
+        Cada status deve ter um atributo descricao (String) que explique o significado do status (e.g., DISPONIVEL("Item disponível para empréstimo")).
+
+        Adicione um método abstrato podeEmprestar() dentro da enumeração, que retorne um boolean. Cada valor da enumeração deve implementar este método de forma que apenas DISPONIVEL retorne true.
+
+        Adicione um método getDescricao() para acessar a descrição.
+
+    Integração:
+
+        Adicione um atributo status (do tipo StatusItem) à classe abstrata ItemBiblioteca.
+
+        Crie uma classe Biblioteca com um ArrayList para armazenar ItemBiblioteca.
+
+        Implemente métodos em Biblioteca para:
+
+            adicionarItem(ItemBiblioteca item)
+
+            listarTodosItens(): Imprime os detalhes de todos os itens e seus status.
+
+            emprestarItem(String ID_UNICO_item): Altera o status do item para EMPRESTADO se ele podeEmprestar(). Caso contrário, imprima uma mensagem informando que o item não pode ser emprestado.
+
+            devolverItem(String ID_UNICO_item): Altera o status para DISPONIVEL.
+
+            buscarItemPorTitulo(String titulo): Retorna uma lista de itens que contêm o título.
+
+    Desafio Extra:
+
+        Garanta que o ID_UNICO seja realmente único e gerado de forma robusta (e.g., usando UUID).
+
+        Adicione um método final na classe ItemBiblioteca chamado infoBasica() que combine título e ano de publicação.
