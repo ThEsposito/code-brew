@@ -16,6 +16,7 @@ public class BibliotecaTest01 {
         Biblioteca lib = new Biblioteca();
         lib.adicionarItem(livro1);
         lib.adicionarItem(rev1);
+        lib.adicionarItem(livro3);
         lib.adicionarItem(cd1);
         lib.adicionarItem(livro2);
 
