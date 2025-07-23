@@ -1,5 +1,6 @@
 package academy.devdojo.maratonajava.javacore.M_Interfaces.test;
 
+import academy.devdojo.maratonajava.javacore.M_Interfaces.domain.DataLoader;
 import academy.devdojo.maratonajava.javacore.M_Interfaces.domain.DatabaseLoader;
 import academy.devdojo.maratonajava.javacore.M_Interfaces.domain.FileLoader;
 
@@ -19,5 +20,10 @@ public class DataLoaderTest01 {
 
         databaseLoader.checkPermission();
         fileLoader.checkPermission();
+
+        // retrieveMaxDataSize é estático, então não pode ser sobrescrito
+        // Posso criar um métdo de mesmo nome na classe implementada, porém, terei acesso às duas versões:
+        DataLoader.retrieveMaxDataSize();
+        DatabaseLoader.retrieveMaxDataSize();
     }
 }
