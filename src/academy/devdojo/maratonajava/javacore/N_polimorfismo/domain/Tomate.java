@@ -27,4 +27,13 @@ public class Tomate extends Produto{
     public void setDataValidade(String dataValidade) {
         this.dataValidade = dataValidade;
     }
+
+    @Override
+    public String toString() {
+        return "Tomate{" +
+                "dataValidade='" + dataValidade + '\'' +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                '}';
+    }
 }
