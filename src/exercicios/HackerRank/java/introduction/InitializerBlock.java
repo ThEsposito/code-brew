@@ -2,7 +2,7 @@ package exercicios.HackerRank.java.introduction;
 
 import java.util.Scanner;
 
-public class JavaInitializerBlock {
+public class InitializerBlock {
     static int B;
     static int H;
     static Boolean flag = false;

@@ -1,6 +1,6 @@
 package exercicios.HackerRank.java.advanced;
 
-public class JavaFactoryPattern {
+public class FactoryPattern {
 
 // Teste
     public static void main(String[] args) {

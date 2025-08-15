@@ -2,7 +2,7 @@ package exercicios.HackerRank.java.strings;
 
 import java.util.Scanner;
 
-public class JavaAnagrams {
+public class Anagrams {
     static int linearSearch(char value, String s){
         for(int i=0; i<s.length(); i++){
             if(s.charAt(i) == value) return i;

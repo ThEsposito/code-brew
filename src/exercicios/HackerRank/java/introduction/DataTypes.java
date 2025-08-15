@@ -2,7 +2,7 @@ package exercicios.HackerRank.java.introduction;
 
 import java.util.Scanner;
 
-public class JavaDataTypes {
+public class DataTypes {
     public static void main(String []argh)
     {
         Scanner sc = new Scanner(System.in);
