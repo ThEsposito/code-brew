@@ -1,4 +1,4 @@
-package exercicios.HackerRank.introduction;
+package exercicios.HackerRank.java.strings;
 
 public class JavaSubstringComparisons {
     public static String getSmallestAndLargest(String s, int k){

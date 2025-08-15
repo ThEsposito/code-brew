@@ -1,4 +1,4 @@
-package exercicios.HackerRank.introduction;
+package exercicios.HackerRank.java.strings;
 
 import java.util.Scanner;
 

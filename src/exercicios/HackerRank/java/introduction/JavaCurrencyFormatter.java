@@ -1,4 +1,4 @@
-package exercicios.HackerRank;
+package exercicios.HackerRank.java.introduction;
 
 import java.text.NumberFormat;
 import java.util.Locale;

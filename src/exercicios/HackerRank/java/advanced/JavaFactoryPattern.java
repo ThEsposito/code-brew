@@ -1,4 +1,4 @@
-package exercicios.HackerRank.introduction;
+package exercicios.HackerRank.java.advanced;
 
 public class JavaFactoryPattern {
 
