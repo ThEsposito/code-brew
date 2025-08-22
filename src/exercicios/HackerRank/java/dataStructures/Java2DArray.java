@@ -27,17 +27,19 @@ public class Java2DArray {
                 throw new RuntimeException(ex);
             }
         });
-        int largestSum = 0;
+
+        int largestSum = Integer.MIN_VALUE;
         for(int i=0; i<arr.size()-2; i++){
-            int actualSum = 0;
             for(int j=0; j<arr.get(i).size()-2; j++){
+                int actualSum = 0;
                 for(int k=0; k<3; k++) {
                     actualSum+=arr.get(i).get(j+k);
                     actualSum+=arr.get(i+2).get(j+k);
                 }
                 actualSum += arr.get(i+1).get(j+1);
+
+                if(actualSum > largestSum) largestSum = actualSum;
             }
-            if(actualSum > largestSum) largestSum = actualSum;
         }
         System.out.println(largestSum);
 
