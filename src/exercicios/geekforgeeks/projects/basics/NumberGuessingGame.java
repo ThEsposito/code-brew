@@ -19,7 +19,7 @@ IMPLEMENTATION DETAILS:
 
 More details: https://www.geeksforgeeks.org/dsa/number-guessing-game-in-java/
  */
-import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class NumberGuessingGame {
@@ -30,11 +30,13 @@ public class NumberGuessingGame {
         boolean win = false;
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("A number is chosen is range 1...100");
+        System.out.println("A number was chosen in range 1...100");
+
         while (attempts < maxAttempts && !win) {
             System.out.print("You have " + (maxAttempts - attempts) + " attempts left. Try to guess it: ");
             try {
-                int guess = sc.nextInt();
+                String guessStr = sc.nextLine();
+                int guess = Integer.parseInt(guessStr);
                 if (guess < 1 || guess > 100) {
                     System.out.println("The number is between 1 and 100! Try again.");
                 } else {
@@ -48,8 +50,11 @@ public class NumberGuessingGame {
                         System.out.println("The number is lower than your guess! Try again!");
                     }
                 }
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Please, enter a valid expression!");
+            } catch (NoSuchElementException e){
+                System.out.println("The buffer was closed! ");
+                break;
             }
             System.out.println();
         }
@@ -58,6 +63,7 @@ public class NumberGuessingGame {
         } else {
             System.out.println("You've exhausted all your attempts! The correct number was "+number+".");
         }
+        sc.close();
     }
 
     public static void main(String[] args) {
