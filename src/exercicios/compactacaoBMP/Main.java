@@ -19,7 +19,7 @@ Todo:
 */
 public class Main {
     public static void main(String[] args) {
-        String originalPath = "src/exercicios/compactacaoBMP/imagens/wallpaper1.bmp";
+        String originalPath = "src/exercicios/compactacaoBMP/imagens/imagem_teste_48mb.bmp";
         String nomeOriginal = originalPath.substring(originalPath.lastIndexOf('/')+1, originalPath. lastIndexOf('.'));
 
         File imagemOriginal = new File(originalPath);
@@ -84,6 +84,7 @@ class Compactador{
             System.out.println("Erro na leitura da imagem original! Confira se o caminho incluído está correto!");
             return;
         }
+        // Aparentemente, o offset é baseado em 4bytes, e não dois. O sinal (MSB) estava inferferindo!
 //        int offset = (imagemOriginalComCabecalho[11]<<8) + imagemOriginalComCabecalho[10];
         int offset = imagemOriginalComCabecalho[13] << 24 + imagemOriginalComCabecalho[12] << 16 + imagemOriginalComCabecalho[11] << 8 + imagemOriginalComCabecalho[10];
 
