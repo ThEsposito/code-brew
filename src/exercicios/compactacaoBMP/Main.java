@@ -2,39 +2,55 @@ package exercicios.compactacaoBMP;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/*
+Todo:
+ - Otimizar a gravação dos arquivos: colocar tudo num buffer só, ao invés de fazer várias chamadas pro
+   SO pra ele escrever pequenas partes. Melhor escrever tudo de uma vez.
+ - Tem algum bug na descompactação que, às vezes, trava a execução da função e não exibe nenhuma das
+   mensagens até apertar alguma tecla dnv. o tempo de execução da func recursiva aparece como 0.
+ - Consertar estouro de memória na linha 214
+*/
 public class Main {
     public static void main(String[] args) {
-        File imagemOriginal = new File("src/exercicios/compactacaoBMP/imagemOriginal.bmp");
-        File imagemCompactada = new File("src/exercicios/compactacaoBMP/imagemCompactada.zmp");
-        File imagemDescompactada = new File("src/exercicios/compactacaoBMP/imagemDescompactada.bmp");
+        String originalPath = "src/exercicios/compactacaoBMP/imagens/wallpaper1.bmp";
+        String nomeOriginal = originalPath.substring(originalPath.lastIndexOf('/')+1, originalPath. lastIndexOf('.'));
 
-        try{
-            System.out.println(Compactador.fileEquals(imagemCompactada, imagemDescompactada, 54));
-        } catch(Exception e){
-            return;
-        }
+        File imagemOriginal = new File(originalPath);
+        File imagemCompactada = new File("src/exercicios/compactacaoBMP/resultados/"+nomeOriginal+"_compactada.zmp");
+        File imagemDescompactada = new File("src/exercicios/compactacaoBMP/resultados/"+nomeOriginal+"_descompactada.bmp");
 
         int opcao;
         Scanner sc = new Scanner(System.in);
         do {
             System.out.println("\nMenu de Operações:");
-            System.out.println("1. Compactar Imagem");
-            System.out.println("2. Descompactar Imagem");
-            System.out.println("3. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.println("  1. Compactar Imagem");
+            System.out.println("  2. Descompactar Imagem");
+            System.out.println("  3. Sair");
+            System.out.print("  Escolha uma opção: ");
             opcao = sc.nextInt();
 
             switch(opcao) {
                 case 1:
+                    Instant liCompac = Instant.now();
                     Compactador.compactarImagem(imagemOriginal, imagemCompactada);
+                    Instant lfCompac = Instant.now();
+                    Duration tExecCompac = Duration.between(liCompac,lfCompac);
+                    System.out.println("Tempo de execução total do compactador: "+ tExecCompac.toMillis() +" ms, ou "+tExecCompac.toSeconds()+ 's');
                     break;
                 case 2:
+                    Instant liDescompac = Instant.now();
                     Compactador.descompactarImagem(imagemCompactada, imagemDescompactada);
+                    Instant lfDescompac = Instant.now();
+                    Duration tExecDescompac = Duration.between(liDescompac,lfDescompac);
+                    System.out.println("Tempo de execução total do descompactador: "+tExecDescompac.toMillis()+" ms, ou "+tExecDescompac.toSeconds()+'s');
+
                     break;
                 case 3:
                     System.out.print("Até mais!\n");
@@ -42,13 +58,14 @@ public class Main {
                 default:
                     System.out.println("Opção inválida!");
             }
-        } while(opcao != 3); //roda até o usuario desejar sair
+        } while(opcao != 3);
 
         long tamArquivoOriginal = imagemOriginal.length();
         long tamArquivoCompactado = imagemCompactada.length();
         long tamArquivoDescompactado = imagemDescompactada.length();
 
-        System.out.println("\nTamanho da imagem Original: "+ tamArquivoOriginal + " bytes");
+//        System.out.println("\nResolução da imagem: "+ );
+        System.out.println("Tamanho da imagem Original: "+ tamArquivoOriginal + " bytes");
         System.out.println("Tamanho da imagem Compactada: " + tamArquivoCompactado + " bytes");
         System.out.println("Tamanho da imagem Remontada: " + tamArquivoDescompactado + " bytes");
 
@@ -67,8 +84,8 @@ class Compactador{
             System.out.println("Erro na leitura da imagem original! Confira se o caminho incluído está correto!");
             return;
         }
-        int offset = (imagemOriginalComCabecalho[11]<<8) + imagemOriginalComCabecalho[10];
-//        int tam_arquivo = (imagemOriginalComCabecalho[5]<<24) + (imagemOriginalComCabecalho[4]<<16) + (imagemOriginalComCabecalho[3]<<8) + imagemOriginalComCabecalho[2];
+//        int offset = (imagemOriginalComCabecalho[11]<<8) + imagemOriginalComCabecalho[10];
+        int offset = imagemOriginalComCabecalho[13] << 24 + imagemOriginalComCabecalho[12] << 16 + imagemOriginalComCabecalho[11] << 8 + imagemOriginalComCabecalho[10];
 
         int colunas_pixels = (imagemOriginalComCabecalho[21]<<24) + (imagemOriginalComCabecalho[20]<<16) + (imagemOriginalComCabecalho[19]<<8) + imagemOriginalComCabecalho[18];
         int linhas_pixels = (imagemOriginalComCabecalho[25]<<24) + (imagemOriginalComCabecalho[24]<<16) + (imagemOriginalComCabecalho[23]<<8) + imagemOriginalComCabecalho[22];
@@ -79,15 +96,17 @@ class Compactador{
         byte[] cabecalho = Arrays.copyOfRange(imagemOriginalComCabecalho, 0, offset);
 
         byte[][] matriz_imagem_original = new byte[linhas_pixels][colunas];
-        int idx = 0;
+        int idx = offset;
 
         for(int i=0; i<linhas_pixels; i++){
             for(int j=0; j<colunas; j++){
                 matriz_imagem_original[i][j] = imagemOriginalComCabecalho[idx];
                 idx++;
             }
+            idx+=zeros_por_linha;
         }
 
+        // TODO: pode ser interessante encontrar uma forma de implementar com arrays para diminuir o tempo de execução
         ArrayIndex indice_vetores = new ArrayIndex();
         ArrayList<Byte> R = new ArrayList<>();
         ArrayList<Byte> G = new ArrayList<>();
@@ -99,8 +118,12 @@ class Compactador{
             System.out.println("Uma imagem compactada já existe no caminho especificado!");
             return;
         }
-
+        // Medindo tempo de execução do algoritmo recursivo utilizado:
+        System.out.println("Compactando...");
+        Instant tempoInicial = Instant.now();
         compactaBMP(linhas_pixels, colunas_pixels, zeros_por_linha, matriz_imagem_original, 0, linhas_pixels-1, 0, colunas_pixels-1, R, G, B, indice_vetores);
+        Instant tempoFinal = Instant.now();
+
 
         FileOutputStream writer = null;
         try {
@@ -116,9 +139,12 @@ class Compactador{
             return;
         }
 
+        // TODO: O processo de gravação, aparentemente, tá demorando demais!
+        System.out.println("Gravando arquivo...");
+        Instant inicioGrav = Instant.now();
         for(int i=0; i<offset; i++){
             try {
-                writer.write(cabecalho[i]); //uso o métdo append???
+                writer.write(cabecalho[i]);
             } catch (IOException e){
                 System.out.println("Erro ao escrever no arquivo de saída");
             }
@@ -126,7 +152,7 @@ class Compactador{
 
         for (int i = 0; i < indice_vetores.valor; i++) {
             try {
-                writer.write(R.get(i)); // Passar como string funciona será????
+                writer.write(R.get(i));
                 writer.write(G.get(i));
                 writer.write(B.get(i));
             } catch (IOException e) {
@@ -137,7 +163,11 @@ class Compactador{
                 return;
             }
         }
-        System.out.println("Imagem compactada com sucesso?");
+        Instant finalGrav = Instant.now();
+        System.out.println("Imagem compactada com sucesso!");
+        System.out.println("Tempo de execução do algoritmo de compactação: " + Duration.between(tempoInicial, tempoFinal).toSeconds() + " segundos");
+        System.out.println("Tempo de gravação do arquivo: " + Duration.between(inicioGrav, finalGrav).toSeconds() + " segundos");
+
         try{
             writer.close();
         } catch (IOException e){
@@ -170,38 +200,32 @@ class Compactador{
             cabecalho = leitor.readNBytes(12);
             int offset = (cabecalho[11] << 8) + cabecalho[10];
             leitor = new FileInputStream(compactada);
+
             cabecalho = leitor.readNBytes(offset);
         } catch(IOException e){
             System.out.println("Erro na leitura do cabeçalho da imagem compactada");
             return;
         }
-        //COLUNAS PIXELS TÁ COMO ZERO!!!!!! LINHAS TÁ COMO 1360 !!!!!!
         int colunas_pixels = (cabecalho[21]<<24) + (cabecalho[20]<<16) + (cabecalho[19]<<8) + cabecalho[18];
         int linhas_pixels = (cabecalho[25]<<24) + (cabecalho[24]<<16) + (cabecalho[23]<<8) + cabecalho[22];
 
         int colunas = colunas_pixels*3;
         int zeros_por_linha = (4-(colunas%4))%4;
 
+        // Essa linha está estourando a memória em alguns casos (resoluções mto altas?)
         byte[][] matriz_reconstruida = new byte[linhas_pixels][colunas + zeros_por_linha];
 
         ArrayIndex indice_vetores = new ArrayIndex();
 
-//        int qtdePixels = linhas_pixels*colunas_pixels; // Tá errado!!!!!!!!
         int tam = ((int) compactada.length() - cabecalho.length) / 3;
-        System.out.println(tam);
         byte[] R = new byte[tam];
         byte[] G = new byte[tam];
-        byte[] B = new byte[tam]; // Dá pra fazer c ArrayList
+        byte[] B = new byte[tam];
 
-        // Esse laço tá tddo errado! A qtde de pixels informada pelo cabeçalho não condiz com a quantidade real
-        // de elementos dos vetores (já que a imagem foi compactada).
-        // Ideia: calcular com (tamTotalDoArquivo-offset)/3
-
-        for(int i=0; i<tam; i+=3){
-            int offsetLeitor = cabecalho.length + indice_vetores.valor*3;
-            byte[] pixelAtual = new byte[3];
+        for(int i=0; i<tam; i++){
+            byte[] pixelAtual;
             try {
-                leitor.readNBytes(pixelAtual, 0, 3); // Estourou aqui
+                pixelAtual = leitor.readNBytes(3); // Estourou aqui
             }catch (IOException e) {
                 System.out.println("Erro na leitura da imagem compactada");
                 return;
@@ -214,9 +238,19 @@ class Compactador{
         }
 
         indice_vetores.valor = 0;
+        // Medindo tempo de execução do algoritmo recursivo utilizado:
+        System.out.println("Descompactando...");
+        Instant tempoInicial = Instant.now();
         descompactaBMP(linhas_pixels, colunas_pixels, zeros_por_linha, matriz_reconstruida, 0, linhas_pixels-1, 0, colunas_pixels-1,R,G,B,indice_vetores);
+        Instant tempoFinal = Instant.now();
+
 
         FileOutputStream writer;
+        try {
+            leitor.close();
+        } catch (IOException e) {
+            System.out.println("Erro ao fechar leitor, no processo de compactação da imagem!");
+        }
         try {
             writer = new FileOutputStream(saida);
         } catch (FileNotFoundException e) {
@@ -227,24 +261,23 @@ class Compactador{
             return;
         }
 
+        System.out.println("Gravando arquivo...");
+        Instant inicioGrav = Instant.now();
         try {
             writer.write(cabecalho);
             for(int i=0; i < linhas_pixels; i++){
                 writer.write(matriz_reconstruida[i]); //gravando de linha em linha
-//                for(int j=0; j<colunas; j++){
-//                    writer.write(matriz_reconstruida[i][j]);
-//                }
-                for(int k=0; k<zeros_por_linha; k++){
-                    writer.write(0);
-                }
             }
 
         } catch(Exception e) {
             System.out.println("Erro na gravação da imagem descompactada");
             return;
         }
+        Instant finalGrav = Instant.now();
 
-        System.out.println("Imagem descompactada com sucesso?");
+        System.out.println("Imagem descompactada com sucesso!");
+        System.out.println("Tempo de execução do algoritmo de descompactação: "+Duration.between(tempoInicial, tempoFinal).toSeconds() +" segundos");
+        System.out.println("Tempo de gravação do arquivo descompactado: "+Duration.between(inicioGrav, finalGrav).toSeconds() +" segundos");
     }
 
     private static void compactaBMP(int linhas_matriz, int colunas_pixel, int zeros_por_linha, byte[][] matriz_imagem_original,
@@ -300,18 +333,6 @@ class Compactador{
         descompactaBMP(linhas, colunas_pixel,zeros_por_linha, matriz_reconstruida, meio_lin+1, lin_final, col_inicial, meio_col, R, G, B, indice_vetores);
         descompactaBMP(linhas, colunas_pixel,zeros_por_linha, matriz_reconstruida, meio_lin+1, lin_final, meio_col+1, col_final, R, G, B, indice_vetores);
 
-    }
-
-    public static boolean fileEquals(File arq1, File arq2, int offset) throws FileNotFoundException, IOException ,SecurityException{
-        FileInputStream reader1 = new FileInputStream(arq1);
-        FileInputStream reader2 = new FileInputStream(arq2);
-
-        byte[] vetor1 = reader1.readNBytes(offset);
-        byte[] vetor2 = reader2.readNBytes(offset);
-        for(int i=0; i<offset; i++){
-            if(vetor1[i] != vetor2[i]) return false;
-        }
-        return true;
     }
 }
 
