@@ -1,4 +1,4 @@
-package exercicios.algoritmoseprogramacaoII.stacks.exercicio_aula3;
+package exercicios.estruturasdedadosI.stacks.exercicio_aula3;
 import java.util.EmptyStackException;
 
 public class Pilha {

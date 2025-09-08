@@ -1,5 +1,6 @@
 package exercicios.hackerrank.java.dataStructures;
 
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -55,6 +56,41 @@ public class Stacks {
         }
         // Se a stack terminou vazia, todos os chars de abertura foram fechados e nao houveram
         // caracteres invalidos.
+        return stack.isEmpty();
+    }
+
+    public static Character fechador(Character abridor){
+
+    }
+
+    public static boolean isBalancedOptimized(String s){
+        if(s.isEmpty()) return false; // ou true????
+        HashMap<Character,Character> map1 = new HashMap<>();
+        map1.put('{', '}');
+        map1.put('(', ')');
+        map1.put('[', ']');
+
+        // Será que dá pra fazer isso sem criar um mapa auxiliar? Soa redundante pra mim
+        HashMap<Character,Character> map2 = new HashMap<>();
+        map2.put('}','{');
+        map2.put(')','(');
+        map2.put(']','[');
+
+        Stack<Character> stack = new Stack<>();
+
+        for(int i=0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if(map1.containsKey(c)) {
+                stack.push(c);
+            } else if(map1.containsValue(c)){
+                if(map1.)
+                    stack.pop();
+            } else {
+                return false; // Ou ignora a iteração, caso a gente queira considerar outros caracteres
+            }
+
+        }
+
         return stack.isEmpty();
     }
 

@@ -1,4 +1,4 @@
-package exercicios.algoritmoseprogramacaoII.relogio;
+package exercicios.estruturasdedadosI.relogio;
 
 import java.util.Scanner;
 

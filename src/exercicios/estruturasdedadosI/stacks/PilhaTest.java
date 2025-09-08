@@ -1,6 +1,4 @@
-package exercicios.algoritmoseprogramacaoII.stacks;
-
-import exercicios.algoritmoseprogramacaoII.stacks.PilhaDinamica;
+package exercicios.estruturasdedadosI.stacks;
 
 public class PilhaTest {
     public static void main(String[] args) {

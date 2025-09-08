@@ -1,4 +1,4 @@
-package exercicios.algoritmoseprogramacaoII.stacks;
+package exercicios.estruturasdedadosI.stacks;
 
 import java.util.EmptyStackException;
 

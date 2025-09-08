@@ -1,4 +1,4 @@
-package exercicios.algoritmoseprogramacaoII.stacks.exercicio_aula3;
+package exercicios.estruturasdedadosI.stacks.exercicio_aula3;
 
 public class BalanceamentoDeParenteses {
     public static boolean isBalanced(String s){

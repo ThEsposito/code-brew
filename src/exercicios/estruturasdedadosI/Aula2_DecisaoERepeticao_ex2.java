@@ -1,4 +1,4 @@
-package exercicios.algoritmoseprogramacaoII;
+package exercicios.estruturasdedadosI;
 import java.util.Scanner;
 
 public class Aula2_DecisaoERepeticao_ex2{
