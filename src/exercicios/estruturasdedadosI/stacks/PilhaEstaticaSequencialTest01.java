@@ -1,6 +1,6 @@
 package exercicios.estruturasdedadosI.stacks;
 
-public class PilhaDInamicaEstaticaTest01 {
+public class PilhaEstaticaSequencialTest01 {
     public static void main(String[] args) {
         PilhaEstaticaGenerica<String> p = new PilhaEstaticaGenerica<String>();
 
