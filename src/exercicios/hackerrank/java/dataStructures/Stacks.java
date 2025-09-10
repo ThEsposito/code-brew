@@ -5,92 +5,30 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Stacks {
-    public static int linearSearch(char value, Character[] arr){
-        for(int i=0; i<arr.length; i++){
-            if(arr[i] == value) return i;
-        }
-        return -1;
-    }
-
-    public static boolean isFechador(Character a, Character b){
-        Character[] openings = {'{','(', '['};
-        Character[] closings = {'}',')',']'};
-
-        for(int i=0; i<openings.length; i++){
-            if((a==openings[i] && b==closings[i]) || (a==closings[i] && b==openings[i])) return true;
-        }
-        return false;
-    }
-
-    public static boolean isBalanced(String s){
-        Character[] openings = {'{','(', '['};
-        Character[] closings = {'}',')',']'};
-        Stack<Character> stack = new Stack<>();
-
-        int idxOpening = linearSearch(s.charAt(0), openings);
-        if(idxOpening == -1) return false; // Ja comecou com um fechador ou char invalido
-
-        stack.add(openings[idxOpening]); // Adiciona o primeiro elemento abridor
-
-        for(int i=1; i<s.length(); i++) {
-            idxOpening = linearSearch(s.charAt(i), openings);
-
-            // Se for abridor, adiciona na pilha e vai pro próximo caractere
-            if (idxOpening != -1) {
-                stack.add(openings[idxOpening]);
-
-            } else {
-                // Caractere inválido ou tentou fechar algo que nao foi aberto
-                if(stack.isEmpty()) return false;
-
-                int idxClosing = linearSearch(s.charAt(i), closings);
-
-                // Caractere invalido.
-                if (idxClosing == -1) {
-                    return false;
-                }
-
-                // Se o Char encontrado fecha o último item da stack, remove ele.
-                if (stack.lastElement() == openings[idxClosing]) stack.pop();
-            }
-        }
-        // Se a stack terminou vazia, todos os chars de abertura foram fechados e nao houveram
-        // caracteres invalidos.
-        return stack.isEmpty();
-    }
-
-    public static Character fechador(Character abridor){
-
-    }
-
     public static boolean isBalancedOptimized(String s){
         if(s.isEmpty()) return false; // ou true????
-        HashMap<Character,Character> map1 = new HashMap<>();
-        map1.put('{', '}');
-        map1.put('(', ')');
-        map1.put('[', ']');
-
-        // Será que dá pra fazer isso sem criar um mapa auxiliar? Soa redundante pra mim
-        HashMap<Character,Character> map2 = new HashMap<>();
-        map2.put('}','{');
-        map2.put(')','(');
-        map2.put(']','[');
+        HashMap<Character,Character> map = new HashMap<>();
+        map.put('{', '}');
+        map.put('(', ')');
+        map.put('[', ']');
 
         Stack<Character> stack = new Stack<>();
 
         for(int i=0; i<s.length(); i++){
             char c = s.charAt(i);
-            if(map1.containsKey(c)) {
+            if(map.containsKey(c)) { // É um abridor
                 stack.push(c);
-            } else if(map1.containsValue(c)){
-                if(map1.)
-                    stack.pop();
+            } else if(map.containsValue(c)) { // É um fechador
+
+                // Se o caractere atual não fechar o último abridor, retorna falso
+                // Precisa desempacotar o Wrapper do mapa???
+                if (c != map.get(stack.pop())) // Na real, tem que conferir se fecha ele, né
+                    return false;
             } else {
-                return false; // Ou ignora a iteração, caso a gente queira considerar outros caracteres
+                return false; // Se o caractere for desconhecido, retorna falso
             }
-
         }
-
+        // Se ficou algum abridor sem fechar, retorna falso
         return stack.isEmpty();
     }
 
@@ -98,7 +36,7 @@ public class Stacks {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input=sc.next();
-            System.out.println(isBalanced(input));
+            System.out.println(isBalancedOptimized(input));
         }
         sc.close();
     }
