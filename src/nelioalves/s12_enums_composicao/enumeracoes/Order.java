@@ -1,4 +1,4 @@
-package nelio.alves.s12_enums_composicao.enumeracoes;
+package nelioalves.s12_enums_composicao.enumeracoes;
 
 import java.util.Date;
 
