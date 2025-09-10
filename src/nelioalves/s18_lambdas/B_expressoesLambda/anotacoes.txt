@@ -1,0 +1,23 @@
+Paradigma Funcional de Programação (baseado no formalismo matemática "cálculo lambda"):
+ - Possui transparência referencial (ausência de efeitos colaterais):
+   -> Não consigo acessar variáveis globais dentro de uma expressão lâmbda
+   -> Uma função com as mesmas entradas sempre vai ter uma mesma saída
+
+ - Objetos imutáveis
+
+ - Funções são objetos de primeira ordem:
+   -> Funções podem ser passadas como parâmetros de métodos e retornadas como
+      resultado de métodos.
+   -> No java, utilizamos "method references", com o operador "::"
+
+      Sintaxe: Classe::método
+
+      Exemplo: System.out::println()
+               Main::compareProducts()
+
+ - Expressividade/código conciso: nada verboso, código curto (conciso).
+
+Expressões Lambda (da programação funcional, e não da matemática):
+ - São funções anônimas de primeira classe
+    -> Funções anônimas: não foram declaradas e não tem nome.
+    -> Primeira classe :podem ser passadas como parâmetro para outras funções.
