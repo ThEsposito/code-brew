@@ -1,0 +1,12 @@
+INTERFACE FUNCIONAL
+    - Uma interface funcional é uma interface que possui um único método abstrato (pode ter
+      outros métodos, contanto que sejam default)
+    - Suas implementações serão tratadas como expressões lambda (detalhado na aula passada):
+    - Sempre que estamos trabalhando com expressões lambda, no fundo estamos mexendo com uma
+      interface funcional
+
+    Alguns exemplos comuns:
+    - Predicate:
+    - Function
+    - Consumer: ao contrário de outras interfaces funcionais, é esperado que ele possa gerar
+      efeitos colaterais
