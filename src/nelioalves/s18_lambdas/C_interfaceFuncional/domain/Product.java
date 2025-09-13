@@ -29,4 +29,27 @@ public class Product implements Comparable<Product>{
     public void setPrice(double price) {
         this.price = price;
     }
+
+    // Da aula de Consumer:
+    public static void staticPriceUpdate(Product p) {
+        p.setPrice(p.getPrice() * 1.1);
+    }
+
+    // Estou diretamente no escopo da classe! Posso fazer o que eu quiser aqui.
+    public void nonStaticPriceUpdate(){
+        this.price *= 1.1;
+    }
+
+
+    // Da aula de Function:
+
+    // Método estático:
+    public static String staticUpperCaseName(Product p){
+        return p.getName().toUpperCase();
+    }
+
+    // Método não-estático
+    public String nonStaticUpperCaseName(){
+        return name.toUpperCase();
+    }
 }
