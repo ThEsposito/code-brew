@@ -20,4 +20,4 @@ Paradigma Funcional de Programação (baseado no formalismo matemática "cálcul
 Expressões Lambda (da programação funcional, e não da matemática):
  - São funções anônimas de primeira classe
     -> Funções anônimas: não foram declaradas e não tem nome.
-    -> Primeira classe :podem ser passadas como parâmetro para outras funções.
+    -> Primeira classe: podem ser passadas como parâmetro para outras funções.
