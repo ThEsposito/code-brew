@@ -43,7 +43,7 @@ public class Main {
         */
 
         // Implementação da interface Function
-        list.stream().map(new UpperCaseName()).collect(Collectors.toList());
+        List<String> nomes = list.stream().map(new UpperCaseName()).toList();
 
         // Reference method com método estático
         list.stream().map(Product::staticUpperCaseName).collect(Collectors.toList());
