@@ -5,8 +5,6 @@ import java.util.Comparator;
 /*
 É mais interessante utilizar comparators porque, se quisermos mudar a forma de comparação entre
 os produtos, precisaríamos alterar o compareTo() da classe em si (o que não é ideal)!
-
-
  */
 public class MyComparator implements Comparator<Product> {
     @Override
