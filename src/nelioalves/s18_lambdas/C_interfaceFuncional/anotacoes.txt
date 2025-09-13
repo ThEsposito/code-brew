@@ -9,4 +9,4 @@ INTERFACE FUNCIONAL
     - Predicate:
     - Function
     - Consumer: ao contrário de outras interfaces funcionais, é esperado que ele possa gerar
-      efeitos colaterais
+      efeitos colaterais (alterar variáveis fora daquele escopo)
