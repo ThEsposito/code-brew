@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 public class ProductPredicate implements Predicate<Product> {
     // O único métdo abstrato da classe
-
     @Override
     public boolean test(Product product) {
         return product.getPrice() >= 100;

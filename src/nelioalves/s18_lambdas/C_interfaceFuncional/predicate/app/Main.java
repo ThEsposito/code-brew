@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+/*
+Comentário interessante:
+Acredito que a interface funcional Predicate tenha vindo do conceito de predicado
+da Matemática Discreta (vi no meu 2o semestre) que é um conjunto de proposições lógicas
+(que vem da lógica proposicional).
+
+Por isso que passamos uma expressão lambda que representa uma expressão lógica (um predicado) para métodos
+como o .removeIf(). No fundo, estamos buscando que os itens que serão removidos atendam a uma
+condição (condição verdadeira, em uma tabela verdade) para aquele predicado que passamos.
+ */
 public class Main {
     public static void main(String[] args) {
 
@@ -38,5 +48,8 @@ public class Main {
         double min = 100;
         Predicate<Product> pred = p -> p.getPrice() >= min;
         list.removeIf(pred);
+
+        // Ainca acredito que esse método abaixo é o mais usável:
+        list.removeIf( p -> p.getPrice() >= min);
     }
 }
