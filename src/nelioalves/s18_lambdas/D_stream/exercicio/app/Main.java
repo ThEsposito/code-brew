@@ -68,6 +68,5 @@ public class Main {
         } catch(IOException ioe){
             System.out.println("ERRO DE ENTRADA DO ARQUIVO");
         }
-
     }
 }
