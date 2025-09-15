@@ -1,4 +1,4 @@
-package nelioalves.s18_lambdas.D_stream.app;
+package nelioalves.s18_lambdas.D_stream.introducao.app;
 
 import java.util.Arrays;
 import java.util.List;
